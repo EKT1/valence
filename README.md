@@ -18,4 +18,5 @@ This will produce a file `textfile.txt.html` where all emotionally relevant word
  - bayes.py - [NLTK](http://www.nltk.org) wrapper
  - valencecolor.py - main program
  - colored.mak - a html template example.
+ - chrome-ext - **Chrome** extension
 
