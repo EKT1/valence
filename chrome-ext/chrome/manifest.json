@@ -1,0 +1,17 @@
+{
+  "name": "A browser action with a popup that shows text valence.",
+  "version": "1.2",
+  "background": {
+    "scripts": ["background.js"],
+    "css": ["base.css"]
+  },
+  "permissions": [
+    "tabs", "http://*/*", "https://*/*"
+  ],
+  "page_action": {
+      "default_title": "Page text valence.",
+      "default_icon": "chrome.png",
+      "default_popup": "popup.html"
+  },
+  "manifest_version": 2
+}
