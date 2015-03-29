@@ -45,6 +45,11 @@ def classify(words):
     feats = dict([(word, True) for word in words])
     return classifier.classify(feats)
 
+def prob_classify(words):
+    get_classifier()
+    feats = dict([(word, True) for word in words])
+    return classifier.prob_classify(feats)
+
 def doit():
 
     get_classifier()
@@ -56,8 +61,7 @@ def doit():
 
 def main():
     global classifier_name
-    global corpus_name
-    parser = OptionParser(usage='Usage: %prog')
+    parser = OptionParser(usage='Usage: %prog file')
     parser.add_option('-f', '--file', dest="filename", help='Corpus file')
     opts, args = parser.parse_args()
 

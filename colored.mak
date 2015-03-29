@@ -1,5 +1,8 @@
-<h5>${_('Emotion detector')} <span style="font-size:80%;color:gray">v0.9</span></h5>
+# -*- coding: utf-8 -*-
+<h5>${_('Emotion detector')} <span style="font-size:80%;color:gray">v1.0</span></h5>
+% if c.lexiconbased:
 <p>Lõigu vasakus servas on leksikonipõhine hinnang.</p>
+% endif
 <p>
 ${_('Keywords are')}
 <span class="word positiveW">${_('positive')}</span>,
@@ -44,14 +47,17 @@ ${c.text}
   border-radius: 10px;
   margin-left:10%;
 }
+% if c.lexiconbased:
 .neutralP  { }
 .positiveP { border-left-color: rgb(146, 208, 80); }
 .negativeP { border-left-color: #b7a6dd; }
 .extremeP    { border-left-color: darkgray; }
 .mixedP    { border-left-color: #d9ddb4;  border-left-style: dotted; }
+% else:
 .neutralB  { }
 .positiveB { border-right-color: rgb(146, 208, 80); }
 .negativeB { border-right-color: #b7a6dd; }
+% endif
 
 div.chart {
   position:relative;

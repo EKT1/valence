@@ -19,13 +19,18 @@ class ValenceController(BaseController):
         if 'dataonly' in p:
             dataonly = p['dataonly']
 
+        lexiconbased="" 
+        if 'lexiconbased' in p:
+            lexiconbased = p['lexiconbased']
+
         if ('text' in p) and p['text']:
-            c.text=marktext(p['text'], dataonly)
+            c.text=marktext(p['text'], dataonly, lexiconbased)
         else:
             c.text = "Nothing"
 
         if dataonly:
             return c.text
         else:
+            c.lexiconbased = lexiconbased
             return render('/valence/colored.mak')
 
