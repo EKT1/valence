@@ -17,6 +17,4 @@ Files:
  - valence/sqnad.csv - dictionary of Estonian words 
  - valence/bayes.py - NLTK wrapper
  - valence/valencecolor.py - main program
- - colored.mak - a html template example.
- - chrome-ext - **Chrome** extension
 
