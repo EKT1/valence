@@ -1,79 +1,45 @@
 # -*- coding: utf-8 -*-
-import sys
-import os
-import operator
-import array
-import codecs
-import re
-import random
-import pickle
-from collections import defaultdict
+from __future__ import print_function
+from valence.bayes import *
 from optparse import OptionParser
-from nltk.classify import NaiveBayesClassifier
 
-space = re.compile('[\'".,!?\\s\\(\\)]+')
-cats = ('positiivne','negatiivne','neutraalne','vastuoluline')
-classifier = None
-corpus_name = 'korpus.csv'
+corpus_name = None
 
-def load_corpus():
-  print >> sys.stderr, "Load corpus:", corpus_name
-  features = []
-  with codecs.open(corpus_name, 'r', encoding='utf-8') as f:
-    #for line in f: print line
-    for line in f:
-        row = line.split(',',1)
-        words = space.split(row[1])
-        feats = dict([(word, True) for word in words])
-        features.append((feats,row[0]))
-  return features
-
-def get_classifier():
-    global classifier
-    if not classifier:
-        corpus = load_corpus()
-        if corpus:
-            print >> sys.stderr,  "Train"
-            classifier = NaiveBayesClassifier.train(corpus)
-            #print >> sys.stderr,  classifier.labels()
-            #print >> sys.stderr,  classifier.most_informative_features(n=10)
-        else:
-            print >> sys.stderr, "No corpus!"
-
-def classify(words):
-    get_classifier()
-    feats = dict([(word, True) for word in words])
-    return classifier.classify(feats)
-
-def prob_classify(words):
-    get_classifier()
-    feats = dict([(word, True) for word in words])
-    return classifier.prob_classify(feats)
-
-def doit():
-
-    get_classifier()
+def doit(fi, fo):
+    get_classifier(corpus_name)
     if classifier:
-        for para in sys.stdin:
+        for para in fi:
             words = space.split(para)
             feats = dict([(word, True) for word in words])
-            print classifier.classify(feats)
+            print(classifier.classify(feats), file=fo)
+
 
 def main():
-    global classifier_name
+    global corpus_name
     parser = OptionParser(usage='Usage: %prog file')
     parser.add_option('-f', '--file', dest="filename", help='Corpus file')
+    parser.add_option('-s', '--set', action="store_true", default=False, dest="set", help='stdio has file list')
     opts, args = parser.parse_args()
 
-    #if len(args)!=1: # or not opts.segment:
+    # if len(args)!=1: # or not opts.segment:
     #    parser.print_help()
     #    sys.exit(1)
 
     if opts.filename:
         corpus_name = opts.filename
 
-    doit()
+    if not opts.set:
+        doit(sys.stdin, sys.stdout)
+    else:
+        for filename in sys.stdin:
+            f = filename.strip()
+            print(f, file=sys.stderr)
+            fi = open(f, "r")
+            fo = open(f + ".e", "w")
+            doit(fi, fo)
+            fi.close()
+            fo.close()
+
 
 if __name__ == '__main__':
     main()
-
