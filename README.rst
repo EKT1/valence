@@ -19,4 +19,5 @@ Files:
  - valence/valencecolor.py - main program
 
 If you use the corpora **valence/korpus.csv, valence/sqnad.csv** in your work, please cite the following paper::
+
   Pajupuu, Hille; Altrov, Rene; Pajupuu, Jaan (2016). Identifying polarity in different text types. *Folklore. Electronic Journal of Folklore*, 64, 25−42. `DOI <http://dx.doi.org/10.7592/FEJF2016.64.polarity>`_ `PDF <www.folklore.ee/folklore/vol64/polarity.pdf>`_
