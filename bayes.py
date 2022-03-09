@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
-from valence.bayes import *
+
+import sys
+from valence.bayes import get_classifier, space
 from optparse import OptionParser
 
-corpus_name = None
 
 def doit(fi, fo):
-    get_classifier(corpus_name)
+    classifier = get_classifier()
     if classifier:
         for para in fi:
             words = space.split(para)
@@ -15,18 +16,9 @@ def doit(fi, fo):
 
 
 def main():
-    global corpus_name
     parser = OptionParser(usage='Usage: %prog file')
-    parser.add_option('-f', '--file', dest="filename", help='Corpus file')
     parser.add_option('-s', '--set', action="store_true", default=False, dest="set", help='stdio has file list')
     opts, args = parser.parse_args()
-
-    # if len(args)!=1: # or not opts.segment:
-    #    parser.print_help()
-    #    sys.exit(1)
-
-    if opts.filename:
-        corpus_name = opts.filename
 
     if not opts.set:
         doit(sys.stdin, sys.stdout)

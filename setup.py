@@ -1,13 +1,13 @@
-from setuptools import setup, find_packages
+from setuptools import setup #, find_packages
 
 setup(
     name='valence',
-    version='1.1',
+    version='1.2',
     description='A package for Estonian language text valence(positive/negative) detection',
     scripts=['bayes.py', 'valencecolor.py'],
-    packages=find_packages(),
+    packages=['valence'],
+    install_requires=['nltk>=3.7'],
     include_package_data=True,
-    install_requires=['nltk>=3.1'],
     url='www.eki.ee',
     author='Institute of the Estonian Language',
     author_email='ekorpus@eki.ee',

@@ -36,6 +36,7 @@ def get_classifier():
             print(classifier.show_most_informative_features(100), file=sys.stderr)
         else:
             print("No corpus!", file=sys.stderr)
+    return classifier
 
 
 def classify(words):
